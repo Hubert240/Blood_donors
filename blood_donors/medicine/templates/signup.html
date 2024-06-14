@@ -13,10 +13,10 @@
             <ul class="nav-list">
                 {% if user.is_authenticated %}
                     <li class="nav-item">Hi {{ user.username }}</li>
-                    <li class="nav-item"><a href="/signout" class="btn btn-danger">Logout</a></li>
+                    <li class="nav-item"><a href="/signout" class="btn btn-primary">Wyloguj</a></li>
                 {% else %}
-                    <li class="nav-item"><a href="/signin" class="btn btn-primary">Login</a></li>
-                    <li class="nav-item"><a href="/signup" class="btn btn-success">Signup</a></li>
+                    <li class="nav-item"><a href="/signin" class="btn btn-primary">Logowanie</a></li>
+                    <li class="nav-item"><a href="/signup" class="btn btn-primary">Rejestracja</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -34,9 +34,10 @@
                         {% endfor %}
                     </div>
                 {% endfor %}
-                <button type="submit" class="btn btn-success">Zarejestruj</button>
+                <button type="submit" class="btn-success">Zarejestruj</button>
             </form>
         </div>
     </div>
 </body>
 </html>
+

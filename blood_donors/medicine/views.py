@@ -7,7 +7,7 @@ from django.contrib.auth import logout
 from django.shortcuts import HttpResponseRedirect
 from .models import Profile
 from django.contrib.auth.models import User
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm
 # Create your views here.
 
 def home(request):
@@ -42,21 +42,23 @@ def signup(request):
 
 def signin(request):
     if request.user.is_authenticated:
-        return render(request, 'home.html')
+        return redirect('/')
+
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('/profile')  # profile
+        form = CustomAuthenticationForm(request, request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/')
         else:
-            msg = 'Error Login'
-            form = AuthenticationForm(request.POST)
-            return render(request, 'login.html', {'form': form, 'msg': msg})
+            return render(request, 'login.html', {'form': form})
     else:
-        form = AuthenticationForm()
-        return render(request, 'login.html', {'form': form})
+        form = CustomAuthenticationForm()
+
+    return render(request, 'login.html', {'form': form})
 
 
 def signout(request):

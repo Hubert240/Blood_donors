@@ -67,8 +67,8 @@ h2 {
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background: #28a745;
-    color: white;
+    background: white;
+    color: red;
     text-decoration: none;
     border-radius: 5px;
     text-align: center;
@@ -77,14 +77,26 @@ h2 {
     font-size: 1em;
 }
 
-.btn.btn-danger {
-    background: #dc3545;
-}
 
 .btn:hover {
-    background: #218838;
+    background: #B60A05;
+    color: white;
 }
 
-.btn.btn-danger:hover {
-    background: #c82333;
+
+.btn-success {
+    display: block; /* Ustawienie jako element blokowy */
+    width: 100%; /* Szerokość 100% kontenera */
+    padding: 10px; /* Wewnętrzny padding */
+    background-color: #4CAF50; /* Kolor tła przycisku */
+    color: white; /* Kolor tekstu */
+    border: none; /* Brak obramowania */
+    border-radius: 4px; /* Zaokrąglenie rogów */
+    cursor: pointer; /* Zmień kursor na wskaźnik */
+    transition: background-color 0.3s; /* Płynne przejście tła */
+}
+
+/* Efekt po najechaniu myszką */
+.btn-success:hover {
+    background-color: #45a049; /* Zmiana koloru tła po najechaniu */
 }

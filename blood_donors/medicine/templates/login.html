@@ -1,15 +1,36 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Signup</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
-<h2>Login</h2> {{ msg }}
+
+
+<div class="top-right">
+            <ul class="nav-list">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">Hi {{ user.username }}</li>
+                    <li class="nav-item"><a href="/signout" class="btn btn-primary">Wyloguj</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="/signin" class="btn btn-primary">Logowanie</a></li>
+                    <li class="nav-item"><a href="/signup" class="btn btn-primary">Rejestracja</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="container">
+    <div class="form-container">
+            <h2>Logowanie</h2> {{ msg }}
   <form method="post">
     {% csrf_token %}
+      <div class="form-group">
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn-success">Zaloguj</button>
   </form>
+        </div>
+
+    </div>
 </body>
 </html>
