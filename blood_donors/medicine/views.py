@@ -7,6 +7,7 @@ from django.contrib.auth import logout
 from django.shortcuts import HttpResponseRedirect
 from .models import Profile
 from django.contrib.auth.models import User
+from .forms import CustomUserCreationForm
 # Create your views here.
 
 def home(request):
@@ -17,9 +18,16 @@ def signup(request):
     if request.user.is_authenticated:
         return redirect('/')
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            first_name = form.cleaned_data.get('first_name')
+            user.first_name = first_name
+            last_name = form.cleaned_data.get('last_name')
+            user.last_name = last_name
+            email = form.cleaned_data.get('email')
+            user.email = email
+            user.save()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
@@ -28,7 +36,7 @@ def signup(request):
         else:
             return render(request, 'signup.html', {'form': form})
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
         return render(request, 'signup.html', {'form': form})
 
 

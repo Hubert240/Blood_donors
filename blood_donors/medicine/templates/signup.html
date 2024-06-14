@@ -1,24 +1,42 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Signup</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
 
-    <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit" class="btn btn-success">Sign up</button>
-  </form>
+
+<div class="top-right">
+            <ul class="nav-list">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">Hi {{ user.username }}</li>
+                    <li class="nav-item"><a href="/signout" class="btn btn-danger">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="/signin" class="btn btn-primary">Login</a></li>
+                    <li class="nav-item"><a href="/signup" class="btn btn-success">Signup</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="container">
+    <div class="form-container">
+            <h2>Rejestracja</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <p class="error">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success">Zarejestruj</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

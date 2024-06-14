@@ -1,17 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Hem Hero</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body>
-   <h2>Welcome!</h2>
-   {% if user.is_authenticated %}
-      Hi {{ user.username }}!
-      <a href="/signout" class="btn btn-danger">Logout</a>
-    {% else %}
-      <a href="/signin" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span>Login</a>
-      <a href="/signup" class="btn btn-success">Signup</a>
-    {% endif %}
+    <header>
+        <div class="header-left">
+            <img src="{% static 'images/logo.jpg' %}" alt="Logo" class="logo">
+            <h2>Welcome!</h2>
+        </div>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Hi {{ user.username }}</li>
+                    <li><a href="/signout" class="btn btn-danger">Logout</a></li>
+                {% else %}
+                    <li><a href="/signin" class="btn btn-primary">Login</a></li>
+                    <li><a href="/signup" class="btn btn-success">Signup</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
 </body>
 </html>
