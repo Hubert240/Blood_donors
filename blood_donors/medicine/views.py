@@ -7,7 +7,7 @@ from django.contrib.auth import logout
 from django.shortcuts import HttpResponseRedirect
 from .models import Profile
 from django.contrib.auth.models import User
-from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, UserEditForm, ProfileEditForm
 # Create your views here.
 
 def home(request):
@@ -77,3 +77,24 @@ def profile(request):
         'profile': profile,
     }
     return render(request, 'profile.html', context)
+
+
+def edit_profile(request):
+    user = request.user
+    profile = user.profile  # Załóżmy, że masz pole OneToOneField z Profile
+
+    if request.method == 'POST':
+        user_form = UserEditForm(request.POST, instance=user)
+        profile_form = ProfileEditForm(request.POST, instance=profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('/profile')  # Przekierowanie po zapisaniu zmian
+    else:
+        user_form = UserEditForm(instance=user)
+        profile_form = ProfileEditForm(instance=profile)
+
+    return render(request, 'edit_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+    })

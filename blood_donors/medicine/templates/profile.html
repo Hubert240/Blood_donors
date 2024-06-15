@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Signup</title>
+    <title>Profil</title>
     <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
@@ -26,6 +26,7 @@
         </div>
 
  <div class="container">
+     <div class="profile-section">
         <h1>Profil użytkownika</h1>
         <p><strong>Imię:</strong> {{ user.first_name }}</p>
         <p><strong>Nazwisko:</strong> {{ user.last_name }}</p>
@@ -33,11 +34,13 @@
         {% if profile %}
             <p><strong>Grupa krwi:</strong> {{ profile.blood_group }}</p>
             <p><strong>Data urodzenia:</strong> {{ profile.birthday }}</p>
-            <p><strong>Rola:</strong> {{ profile.role }}</p>
             <p><strong>Level:</strong> {{ profile.exp }}</p>
         {% else %}
             <p>Brak dodatkowych informacji o profilu.</p>
         {% endif %}
+      <a href="/edit_profile" class="btn-edit">Edytuj dane</a>
+     </div>
+     <a href="/documents" class="btn-documents">Dokumenty</a>
     </div>
 
 </body>

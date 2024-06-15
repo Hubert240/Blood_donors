@@ -16,9 +16,13 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
-    position: relative;
+    margin-bottom: 20px; /* Adds spacing between the sections */
 }
 
+.profile-section {
+    margin-bottom: 20px;
+
+}
 .top-right {
     position: absolute;
     top: 10px;
@@ -99,10 +103,47 @@ h2 {
     background-color: #45a049; /* Zmiana koloru tła po najechaniu */
 }
 
+.btn-edit {
+    display: block;
+    width: 90%;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
 
+.btn-edit:hover {
+    background-color: #45a049;
+}
+
+.btn-documents {
+    display: block;
+    width: 90%;
+    padding: 10px 20px;
+    background-color: #3498db; /* Blue color for documents button */
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+.btn-documents:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
 
 .logo {
     width: 100px;
     height: 100px;
+
     margin-right: 1500px;
+
 }
