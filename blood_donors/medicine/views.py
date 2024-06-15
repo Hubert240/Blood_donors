@@ -66,9 +66,14 @@ def signout(request):
     return redirect('/')
 
 def profile(request):
-    users = User.objects.all()
-    profiles = Profile.objects.select_related('user').all()
+    user = request.user
+    try:
+        profile = Profile.objects.get(user=user)
+    except Profile.DoesNotExist:
+        profile = None
 
-    user_profiles = zip(users, profiles)
-
-    return render(request, 'profile.html',{'user_profiles': user_profiles} )
+    context = {
+        'user': user,
+        'profile': profile,
+    }
+    return render(request, 'profile.html', context)

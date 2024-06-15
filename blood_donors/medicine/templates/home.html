@@ -4,25 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Hem Hero</title>
-    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
-    <header>
-        <div class="header-left">
-            <img src="{% static 'images/logo.jpg' %}" alt="Logo" class="logo">
-            <h2>Welcome!</h2>
-        </div>
-        <nav>
-            <ul>
-                {% if user.is_authenticated %}
-                    <li>Hi {{ user.username }}</li>
-                    <li><a href="/signout" class="btn btn-danger">Logout</a></li>
-                {% else %}
-                    <li><a href="/signin" class="btn btn-primary">Login</a></li>
-                    <li><a href="/signup" class="btn btn-success">Signup</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
+<div class="top-right">
+
+
+    <ul class="nav-list">
+        <a href="/">
+            <img src="{% static 'images/logo1.png' %}" alt="Logo" class="logo">
+        </a>
+        {% if user.is_authenticated %}
+            <li class="nav-item">Zalogowano jako: {{ user.username }}</li>
+            <li class="nav-item"><a href="/profile" class="btn btn-danger">Profil</a></li>
+            <li class="nav-item"><a href="/signout" class="btn btn-primary">Wyloguj</a></li>
+        {% else %}
+            <li class="nav-item"><a href="/signin" class="btn btn-primary">Logowanie</a></li>
+            <li class="nav-item"><a href="/signup" class="btn btn-primary">Rejestracja</a></li>
+        {% endif %}
+    </ul>
+</div>
 </body>
 </html>

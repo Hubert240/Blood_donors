@@ -16,7 +16,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
-    position: relative; /* Dodane */
+    position: relative;
 }
 
 .top-right {
@@ -77,12 +77,10 @@ h2 {
     font-size: 1em;
 }
 
-
 .btn:hover {
     background: #B60A05;
     color: white;
 }
-
 
 .btn-success {
     display: block; /* Ustawienie jako element blokowy */
@@ -99,4 +97,12 @@ h2 {
 /* Efekt po najechaniu myszką */
 .btn-success:hover {
     background-color: #45a049; /* Zmiana koloru tła po najechaniu */
+}
+
+
+
+.logo {
+    width: 100px;
+    height: 100px;
+    margin-right: 1500px;
 }
