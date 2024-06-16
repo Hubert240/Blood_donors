@@ -1,4 +1,4 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
-
-
-<div class="top-right">
+    <div class="top-bar">
+        <div class="logo-container">
+            <a href="/">
+                <img src="{% static 'images/logo1.png' %}" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="nav-container">
             <ul class="nav-list">
-                <a href="/">
-                    <img src="{% static 'images/logo1.png' %}" alt="Logo" class="logo">
-                </a>
                 {% if user.is_authenticated %}
-                    <li class="nav-item">Zalogowano jako:  {{ user.username }}</li>
+                    <li class="nav-item">Zalogowano jako: {{ user.username }}</li>
                     <li class="nav-item"><a href="/profile" class="btn btn-danger">Profil</a></li>
                     <li class="nav-item"><a href="/signout" class="btn btn-primary">Wyloguj</a></li>
                 {% else %}
@@ -24,24 +25,25 @@
                 {% endif %}
             </ul>
         </div>
-
- <div class="container">
-     <div class="profile-section">
-        <h1>Profil użytkownika</h1>
-        <p><strong>Imię:</strong> {{ user.first_name }}</p>
-        <p><strong>Nazwisko:</strong> {{ user.last_name }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        {% if profile %}
-            <p><strong>Grupa krwi:</strong> {{ profile.blood_group }}</p>
-            <p><strong>Data urodzenia:</strong> {{ profile.birthday }}</p>
-            <p><strong>Level:</strong> {{ profile.exp }}</p>
-        {% else %}
-            <p>Brak dodatkowych informacji o profilu.</p>
-        {% endif %}
-      <a href="/edit_profile" class="btn-edit">Edytuj dane</a>
-     </div>
-     <a href="/documents" class="btn-documents">Dokumenty</a>
     </div>
 
+    <div class="container">
+        <div class="form-container">
+            <h1>Profil użytkownika</h1>
+            <p><strong>Imię:</strong> {{ user.first_name }}</p>
+            <p><strong>Nazwisko:</strong> {{ user.last_name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            {% if profile %}
+                <p><strong>Grupa krwi:</strong> {{ profile.blood_group }}</p>
+                <p><strong>Data urodzenia:</strong> {{ profile.birthday }}</p>
+                <p><strong>Rola:</strong> {{ profile.role }}</p>
+                <p><strong>Level:</strong> {{ profile.exp }}</p>
+            {% else %}
+                <p>Brak dodatkowych informacji o profilu.</p>
+            {% endif %}
+            <a href="/edit_profile" class="btn-edit">Edytuj dane</a>
+        </div>
+            <a href="/documents" class="btn-documents">Dokumenty</a>
+    </div>
 </body>
 </html>

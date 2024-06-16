@@ -7,22 +7,24 @@
     <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
-<div class="top-right">
-
-
-    <ul class="nav-list">
-        <a href="/">
-            <img src="{% static 'images/logo1.png' %}" alt="Logo" class="logo">
-        </a>
-        {% if user.is_authenticated %}
-            <li class="nav-item">Zalogowano jako: {{ user.username }}</li>
-            <li class="nav-item"><a href="/profile" class="btn btn-danger">Profil</a></li>
-            <li class="nav-item"><a href="/signout" class="btn btn-primary">Wyloguj</a></li>
-        {% else %}
-            <li class="nav-item"><a href="/signin" class="btn btn-primary">Logowanie</a></li>
-            <li class="nav-item"><a href="/signup" class="btn btn-primary">Rejestracja</a></li>
-        {% endif %}
-    </ul>
-</div>
+    <div class="top-bar">
+        <div class="logo-container">
+            <a href="/">
+                <img src="{% static 'images/logo1.png' %}" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="nav-container">
+            <ul class="nav-list">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">Zalogowano jako: {{ user.username }}</li>
+                    <li class="nav-item"><a href="/profile" class="btn btn-danger">Profil</a></li>
+                    <li class="nav-item"><a href="/signout" class="btn btn-primary">Wyloguj</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="/signin" class="btn btn-primary">Logowanie</a></li>
+                    <li class="nav-item"><a href="/signup" class="btn btn-primary">Rejestracja</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,42 +1,31 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Logowanie</title>
+    <title>Hem Hero</title>
     <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
     <div class="top-bar">
         <div class="logo-container">
-            <a href="/">
+            <a href="/admin_home">
                 <img src="{% static 'images/logo1.png' %}" alt="Logo" class="logo">
             </a>
         </div>
         <div class="nav-container">
             <ul class="nav-list">
                 {% if user.is_authenticated %}
-                    <li class="nav-item">Zalogowano jako:  {{ user.username }}</li>
-                    <li class="nav-item"><a href="/profile" class="btn btn-danger">Profil</a></li>
+                    <li class="nav-item">Zalogowano jako: {{ user.username }}</li>
+                    <li class="nav-item"><a href="/reservation_history" class="btn btn-danger">Historia</a></li>
+                    <li class="nav-item"><a href="/make_reservation" class="btn btn-danger">Rezerwacje</a></li>
+                    <li class="nav-item"><a href="/add_medical_test_result" class="btn btn-danger">Dodaj Badanie</a></li>
                     <li class="nav-item"><a href="/signout" class="btn btn-primary">Wyloguj</a></li>
                 {% else %}
                     <li class="nav-item"><a href="/signin" class="btn btn-primary">Logowanie</a></li>
                     <li class="nav-item"><a href="/signup" class="btn btn-primary">Rejestracja</a></li>
                 {% endif %}
             </ul>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="form-container">
-            <h2>Logowanie</h2> {{ msg }}
-            <form method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    {{ form.as_p }}
-                    <button type="submit" class="btn-success">Zaloguj</button>
-                </div>
-            </form>
         </div>
     </div>
 </body>

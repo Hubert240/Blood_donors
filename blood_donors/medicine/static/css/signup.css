@@ -2,42 +2,132 @@ body {
     font-family: Arial, sans-serif;
     background: url('../images/krew2.png') no-repeat center center fixed;
     background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
+    padding: 0;
 }
 
-.container {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-    margin-bottom: 20px; /* Adds spacing between the sections */
+.top-bar {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: red;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
-.profile-section {
-    margin-bottom: 20px;
-
+.logo-container {
+    display: flex;
+    align-items: center;
 }
-.top-right {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
 }
 
 .nav-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    display: flex; /* Ustawienie przycisków w jednym rzędzie */
+    display: flex;
+    align-items: center;
 }
 
 .nav-item {
-    margin-right: 10px; /* Odstęp między przyciskami */
+    color: #fff;
+    margin-left: 20px;
+}
+
+.nav-item a, .nav-item {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-item .btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: red;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #fff;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #fff;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: calc(100vh - 70px);
+    margin-top: 100px; /* Dodaj margines górny na przesunięcie poniżej top bar */
+}
+
+.history-container {
+    background: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+h1 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    margin-top:50px;
 }
 
 h2 {
@@ -71,7 +161,7 @@ h2 {
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background: white;
+    background: #fff;
     color: red;
     text-decoration: none;
     border-radius: 5px;
@@ -87,20 +177,19 @@ h2 {
 }
 
 .btn-success {
-    display: block; /* Ustawienie jako element blokowy */
-    width: 100%; /* Szerokość 100% kontenera */
-    padding: 10px; /* Wewnętrzny padding */
-    background-color: #4CAF50; /* Kolor tła przycisku */
-    color: white; /* Kolor tekstu */
-    border: none; /* Brak obramowania */
-    border-radius: 4px; /* Zaokrąglenie rogów */
-    cursor: pointer; /* Zmień kursor na wskaźnik */
-    transition: background-color 0.3s; /* Płynne przejście tła */
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-/* Efekt po najechaniu myszką */
 .btn-success:hover {
-    background-color: #45a049; /* Zmiana koloru tła po najechaniu */
+    background-color: #45a049;
 }
 
 .btn-edit {
@@ -136,14 +225,7 @@ h2 {
     font-size: 1em;
     transition: background-color 0.3s;
 }
+
 .btn-documents:hover {
     background-color: #2980b9; /* Darker blue on hover */
-}
-
-.logo {
-    width: 100px;
-    height: 100px;
-
-    margin-right: 1500px;
-
 }

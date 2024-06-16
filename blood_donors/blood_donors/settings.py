@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'blood_donors.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blood',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': '123',
         'HOST': 'localhost',
