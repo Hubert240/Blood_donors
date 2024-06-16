@@ -26,5 +26,56 @@
             </ul>
         </div>
     </div>
+    {% if user.is_authenticated %}
+    <div class="content">
+        <div class="pane-left">
+            <div class="exp-container">
+                <span class="exp-bar">Current Level: {{current_level}}</span>
+                {% if current_level == 10 %}
+                    You've reached max level!
+                    <span class="exp-bar">Experience: {{profile.exp}}</span>
+                    <table class="exp-progress">
+                        <tbody>
+                        <tr>
+                            <td style="width: 100%; background-color: green;">&nbsp;</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                {% else %}
+                <span class="exp-bar">Experience: {{profile.exp}}</span>
+                <table class="exp-progress">
+                    <tbody>
+                    <tr>
+                        <td style="width: {{progress}}%; background-color: green;">&nbsp;</td>
+                        <td style="width: {{progress_2}}%; background-color: red;">&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+                You need {{experience_missing}} more to reach next level!
+                {% endif %}
+            </div>
+        </div>
+        <div class="pane-right">
+            <div class="reservation-container">
+            {% if reservations %}
+                <span class="exp-bar">Last reservation:</span>
+                <span class="exp-bar">{{last_reservation}}</span>
+                <span class="exp-bar">Click to check reservations history</span>
+                <span class="exp-bar"><a class="history-button" href="{% url 'reservation_history_user' %}">History</a></span>
+                {% if can_reserve %}
+                    <span class="exp-bar">Click to add new reservation</span>
+                    <span class="exp-bar"><a class="reservation-button" href="{% url 'make_reservation ' %}"></a></span>
+                {% else %}
+                    <span class="exp-bar">You can't make new reservation yet.</span>
+                {% endif %}
+            {% else %}
+            <span class="exp-bar">No reservations in history</span>
+            <span class="exp-bar">Click to add new reservation.</span>
+                <span class="exp-bar"><a class="reservation-button" href="{% url 'make_reservation' %}">New reservation</a></span>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
 </body>
 </html>
