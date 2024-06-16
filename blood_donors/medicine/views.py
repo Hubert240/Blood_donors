@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
+from datetime import datetime, timedelta
+from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
@@ -10,11 +12,79 @@ from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, UserEditForm, ProfileEditForm, ReservationForm, \
     MedicalTestResultForm
 
-
+#skumulowane
+levels = {
+    0: 0,
+    1:500,
+    2:1500,
+    3:3000,
+    4:5000,
+    5:7500,
+    6:11000,
+    7:14000,
+    8:18000,
+    9:25000,
+    10:30000
+}
 # Create your views here.
 
 
 def home(request):
+    if request.user.is_authenticated:
+        current_user = request.user
+        last_reservation = None
+        can_make_new_reservation = False
+        try:
+            current_profile = Profile.objects.get(user=current_user)
+            reservations = Reservation.objects.filter(user=current_user).order_by('scheduled_date')
+            reservations_completed = Reservation.objects.filter(user=current_user, status='completed').order_by('scheduled_date')
+            if reservations:
+                last_reservation = reservations.last()
+            if reservations_completed:
+                last_completed_reservation = reservations_completed.last()
+                today=timezone.now()
+                scheduled_date = last_completed_reservation.scheduled_date
+                delta = scheduled_date+timedelta(days=90)
+                if today>=delta:
+                    can_make_new_reservation = True
+            current_exp = current_profile.exp
+            for key, value in levels.items():
+                if current_exp >= value:
+                    continue
+                else:
+                    current_level = key-1
+                    if current_level == 10:
+                        next_level = None
+                        experience_missing = None
+                        progress = 100
+                        current_level = None
+                        experience_missing = None
+                        current_progress = None
+                        required_progress = None
+                        progress_2 = 0
+                    else:
+                        next_level = key
+                        experience_missing = levels[next_level]-current_exp
+                        current_progress = levels[current_level]-current_exp
+                        required_progress = levels[next_level]-levels[current_level]
+                        progress = round((current_progress/required_progress)*100,0)
+                        progress_2 = 100 - progress
+                    break
+
+
+
+            return render(request,'home.html',{"profile": current_profile, "reservations": reservations,
+                                               "current_level": current_level,
+                                               "next_level": next_level,
+                                               "experience_missing": experience_missing,
+                                               "current_progress": current_progress,
+                                               "progress": progress, "progress_2": progress_2,
+                                               "last_reservation": last_reservation,
+                                               "can_reserve": can_make_new_reservation})
+        except Profile.DoesNotExist:
+            profile = None
+            reservations = None
+
     return render(request, 'home.html')
 
 
@@ -132,6 +202,10 @@ def reservation_history(request):
     reservations = Reservation.objects.filter(user=request.user).order_by('-scheduled_date')
     return render(request, 'reservation_history.html', {'reservations': reservations})
 
+def reservation_history_user(request):
+    current_user = request.user
+    reservations = Reservation.objects.filter(user=current_user)
+    return render(request, 'reservation_history_user.html', {"reservations": reservations})
 
 def add_medical_test_result(request):
     if request.method == 'POST':

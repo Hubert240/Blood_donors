@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     blood_group = models.CharField(max_length=10)
@@ -29,7 +30,7 @@ class Reservation(models.Model):
     )
 
     def __str__(self):
-        return f"Reservation for {self.research.name} by {self.user.username} on {self.scheduled_date}"
+        return f"{self.scheduled_date} \n Status: {self.status}"
 
 
 class MedicalTestResult(models.Model):
