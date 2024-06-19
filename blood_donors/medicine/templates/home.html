@@ -27,13 +27,14 @@
         </div>
     </div>
     {% if user.is_authenticated %}
+    {% if profile %}
     <div class="content">
         <div class="pane-left">
             <div class="exp-container">
-                <span class="exp-bar">Current Level: {{current_level}}</span>
+                <span class="exp-bar">Poziom: {{current_level}}</span>
                 {% if current_level == 10 %}
-                    You've reached max level!
-                    <span class="exp-bar">Experience: {{profile.exp}}</span>
+                    Osiągnąłeś maksymalny poziom!
+                    <span class="exp-bar">Exp: {{profile.exp}}</span>
                     <table class="exp-progress">
                         <tbody>
                         <tr>
@@ -42,7 +43,7 @@
                         </tbody>
                     </table>
                 {% else %}
-                <span class="exp-bar">Experience: {{profile.exp}}</span>
+                <span class="exp-bar">Exp: {{profile.exp}}</span>
                 <table class="exp-progress">
                     <tbody>
                     <tr>
@@ -51,31 +52,45 @@
                     </tr>
                     </tbody>
                 </table>
-                You need {{experience_missing}} more to reach next level!
+                Potrzebujesz jeszcze {{experience_missing}} do kolejnego poziomu!
+                <span class="exp-bar">&nbsp;</span>
+                <span class="exp-bar"><a href="{% url 'ranking' %}">Sprawdź ranking</a></span>
+
                 {% endif %}
             </div>
         </div>
         <div class="pane-right">
             <div class="reservation-container">
             {% if reservations %}
-                <span class="exp-bar">Last reservation:</span>
+                <span class="exp-bar">Ostatnia rezerwacja:</span>
                 <span class="exp-bar">{{last_reservation}}</span>
-                <span class="exp-bar">Click to check reservations history</span>
-                <span class="exp-bar"><a class="history-button" href="{% url 'reservation_history_user' %}">History</a></span>
+                <span class="exp-bar">&nbsp;</span>
+                <span class="exp-bar">Sprawdź historię rezerwacji</span>
+                <span class="exp-bar">&nbsp;</span>
+                <span class="exp-bar"><a class="history-button" href="{% url 'reservation_history_user' %}">Historia</a></span>
                 {% if can_reserve %}
-                    <span class="exp-bar">Click to add new reservation</span>
+                    <span class="exp-bar">&nbsp;</span>
+                    <span class="exp-bar">Wciśnij aby dodać nową rezerwację</span>
                     <span class="exp-bar"><a class="reservation-button" href="{% url 'make_reservation ' %}"></a></span>
                 {% else %}
-                    <span class="exp-bar">You can't make new reservation yet.</span>
+                    <span class="exp-bar">Jeszcze nie możesz dodać rezerwacji.</span>
                 {% endif %}
             {% else %}
-            <span class="exp-bar">No reservations in history</span>
-            <span class="exp-bar">Click to add new reservation.</span>
-                <span class="exp-bar"><a class="reservation-button" href="{% url 'make_reservation' %}">New reservation</a></span>
+            <span class="exp-bar">Brak rezerwacji w historii</span>
+                <span class="exp-bar">&nbsp;</span>
+            <span class="exp-bar">Kliknij aby dodać rezerwacje.</span>
+                <span class="exp-bar"><a class="reservation-button" href="{% url 'make_reservation' %}">Nowa rezerwacja</a></span>
             {% endif %}
             </div>
         </div>
     </div>
+    {% else %}
+        <div class="container" style="height: 200px; margin-top: 10%;">
+            <div class="pane-left">
+                Na początek uzupełnij swój profil!
+            </div>
+        </div>
+    {% endif %}
 {% endif %}
 </body>
 </html>

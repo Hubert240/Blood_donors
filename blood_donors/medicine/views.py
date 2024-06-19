@@ -40,6 +40,7 @@ def home(request):
             current_profile = Profile.objects.get(user=current_user)
             reservations = Reservation.objects.filter(user=current_user).order_by('scheduled_date')
             reservations_completed = Reservation.objects.filter(user=current_user, status='completed').order_by('scheduled_date')
+            reservation_pending = Reservation.objects.filter(user=current_user, status='pending')
             if reservations:
                 last_reservation = reservations.last()
             if reservations_completed:
@@ -47,11 +48,11 @@ def home(request):
                 today=timezone.now()
                 scheduled_date = last_completed_reservation.scheduled_date
                 delta = scheduled_date+timedelta(days=90)
-                if today>=delta:
+                if today>=delta and not reservation_pending:
                     can_make_new_reservation = True
             current_exp = current_profile.exp
             for key, value in levels.items():
-                if current_exp >= value:
+                if current_exp >= value :
                     continue
                 else:
                     current_level = key-1
@@ -89,7 +90,10 @@ def home(request):
 
     return render(request, 'home.html')
 
+def ranking(request):
+    users = Profile.objects.all().order_by('-exp')[:10]
 
+    return render(request, 'ranking.html', {'users': users})
 def admin_home(request):
     return render(request, 'admin_home.html')
 
