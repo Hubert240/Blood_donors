@@ -10,7 +10,7 @@ from django.shortcuts import HttpResponseRedirect
 from .models import Profile, Reservation, MedicalTestResult
 from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, UserEditForm, ProfileEditForm, ReservationForm, \
-    MedicalTestResultForm
+    MedicalTestResultForm, ReservationStatusForm
 from django.contrib import messages  # Import the messages framework
 
 
@@ -200,8 +200,23 @@ def make_reservation(request):
     return render(request, 'make_reservation.html', {'form': form})
 
 
-def reservation_history(request):
-    reservations = Reservation.objects.filter(user=request.user).order_by('-scheduled_date')
+def get_next_status(current_status):
+    status_choices = ['pending', 'confirmed', 'completed', 'cancelled']
+    current_index = status_choices.index(current_status)
+    next_index = (current_index + 1) % len(status_choices)
+    return status_choices[next_index]
+
+
+def reservation_history(request, id=None):
+    if request.method == 'POST':
+        reservation_id = request.POST.get('reservation_id')
+        print(reservation_id)
+        reservation = Reservation.objects.get(id=reservation_id)
+        reservation.status = get_next_status(reservation.status)
+        reservation.save()
+        return redirect('reservation_history')
+
+    reservations = Reservation.objects.all().order_by('-id')
     return render(request, 'reservation_history.html', {'reservations': reservations})
 
 
