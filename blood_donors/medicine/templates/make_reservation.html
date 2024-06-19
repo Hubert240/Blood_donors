@@ -1,15 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Make a Reservation</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reservation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
-    <h1>Make a Reservation</h1>
+<div class="top-bar">
+        <div class="logo-container">
+            <a href="/">
+                <img src="{% static 'images/logo1.png' %}" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="nav-container">
+            <ul class="nav-list">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">Zalogowano jako: {{ user.username }}</li>
+                    <li class="nav-item"><a href="/signout" class="btn btn-primary">Wyloguj</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="/signin" class="btn btn-primary">Logowanie</a></li>
+                    <li class="nav-item"><a href="/signup" class="btn btn-primary">Rejestracja</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+<div class="form-container" style="margin-top: 15%;">
+    <h1>Nowa rezerwacja</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <button type="submit">Zgłoś</button>
     </form>
+</div>
 </body>
 </html>
