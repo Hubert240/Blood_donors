@@ -37,6 +37,7 @@
                 <tr>
                     <th>ID Rezerwacji</th>
                     <th>Data Rezerwacji</th>
+                    <th>Użytkownik</th>
                     <th>Zaplanowana Data</th>
                     <th>Nazwa Badania</th>
                     <th>Status</th>
@@ -49,6 +50,7 @@
                     <tr>
                         <td>{{ reservation.id }}</td>
                         <td>{{ reservation.reservation_date }}</td>
+                        <td>{{ reservation.user.username }}</td>
                         <td>{{ reservation.scheduled_date }}</td>
                         <td>{{ reservation.research.name }}</td>
                         <td>{{ reservation.status }}</td>
