@@ -335,3 +335,51 @@ h2 {
     background-color: #dff0d8;
     border-color: #d6e9c6;
 }
+
+
+.hero-section {
+    text-align: center; /* Wyśrodkowanie tekstu */
+    margin-top: 10%; /* Odstęp od góry */
+    width: 52%;
+    margin-left:24%;
+}
+
+.hero-title {
+    font-size: 4em; /* Duży rozmiar czcionki */
+    color: #B60A05; /* Kolor tekstu */
+}
+
+.announcement {
+    display: flex; /* Ustawienie elementów w linii */
+    align-items: center; /* Wyrównanie elementów w pionie */
+    justify-content: center; /* Wyśrodkowanie elementów w poziomie */
+    width: 50%; /* Szerokość kontenera z ogłoszeniem */
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Wyrównanie tekstu do lewej */
+    margin: 0 auto; /* Wyśrodkowanie w poziomie */
+}
+
+.announcement-image {
+    width: 200px; /* Szerokość obrazka */
+    height: auto; /* Automatyczne skalowanie wysokości */
+    margin-right: 20px; /* Odstęp między obrazkiem a tekstem */
+}
+
+.announcement-text {
+    flex: 1; /* Pozwolenie tekstowi na zajęcie pozostałej przestrzeni */
+}
+
+.announcement-title {
+    font-size: 2em; /* Rozmiar tytułu */
+    color: #B60A05; /* Kolor tekstu */
+    margin-top: 0; /* Usunięcie domyślnego marginesu górnego */
+}
+
+.announcement-text p {
+    font-size: 1.1em; /* Rozmiar tekstu */
+    line-height: 1.5; /* Wysokość wiersza */
+    margin-bottom: 0; /* Usunięcie domyślnego marginesu dolnego */
+}
