@@ -53,3 +53,14 @@ class MedicalTestResultForm(forms.ModelForm):
             'user', 'blood_group', 'hemoglobin_level', 'platelet_count', 'white_blood_cell_count',
             'blood_pressure_systolic', 'blood_pressure_diastolic', 'heart_rate', 'comments', 'is_eligible'
         ]
+        labels = {
+            'blood_group': 'Grupa krwi',
+            'hemoglobin_level': 'Poziom hemoglobiny',
+            'platelet_count': 'Liczba płytek krwi',
+            'white_blood_cell_count': 'Liczba białych krwinek',
+            'blood_pressure_systolic': 'Ciśnienie skurczowe',
+            'blood_pressure_diastolic': 'Ciśnienie rozkurczowe',
+            'heart_rate': 'Tętno',
+            'comments': 'Komentarze',
+            'is_eligible': 'Czy kwalifikowany'
+        }

@@ -7,10 +7,12 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
 from django.shortcuts import HttpResponseRedirect
-from .models import Profile, Reservation
+from .models import Profile, Reservation, MedicalTestResult
 from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, UserEditForm, ProfileEditForm, ReservationForm, \
     MedicalTestResultForm
+from django.contrib import messages  # Import the messages framework
+
 
 #skumulowane
 levels = {
@@ -202,10 +204,12 @@ def reservation_history(request):
     reservations = Reservation.objects.filter(user=request.user).order_by('-scheduled_date')
     return render(request, 'reservation_history.html', {'reservations': reservations})
 
+
 def reservation_history_user(request):
     current_user = request.user
     reservations = Reservation.objects.filter(user=current_user)
     return render(request, 'reservation_history_user.html', {"reservations": reservations})
+
 
 def add_medical_test_result(request):
     if request.method == 'POST':
@@ -214,7 +218,16 @@ def add_medical_test_result(request):
             medical_test_result = form.save(commit=False)
             medical_test_result.user = form.cleaned_data['user']
             medical_test_result.save()
-            return redirect('medical_test_result_success')
+            messages.success(request, 'Dodano wyniki badań')
+            return redirect('add_medical_test_result')
     else:
         form = MedicalTestResultForm()
     return render(request, 'add_medical_test_result.html', {'form': form})
+
+
+def admin_view_medical_tests(request):
+    if not request.user.is_superuser:
+        return redirect('home')  # Redirect non-admin users to the home page
+
+    medical_tests = MedicalTestResult.objects.all().order_by('-test_date')
+    return render(request, 'admin_view_medical_tests.html', {'medical_tests': medical_tests})

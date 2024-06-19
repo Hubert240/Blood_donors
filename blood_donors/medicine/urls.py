@@ -12,5 +12,5 @@ urlpatterns = [
     path('reservation_history/', views.reservation_history, name='reservation_history'),
     path('add_medical_test_result/', views.add_medical_test_result, name='add_medical_test_result'),
     path('reservation_history_user/', views.reservation_history_user, name='reservation_history_user'),
-
+    path('admin_view_medical_tests/', views.admin_view_medical_tests, name='admin_view_medical_tests'),
 ]

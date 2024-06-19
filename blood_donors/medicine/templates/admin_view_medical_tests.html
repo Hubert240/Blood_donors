@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Medical Tests</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo-container">
+            <a href="/admin_home">
+                <img src="{% static 'images/logo1.png' %}" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="nav-container">
+            <ul class="nav-list">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">Zalogowano jako: {{ user.username }}</li>
+                    <li class="nav-item"><a href="/reservation_history" class="btn btn-danger">Historia</a></li>
+                    <li class="nav-item"><a href="/admin_view_medical_tests" class="btn btn-danger">Badania</a></li>
+                    <li class="nav-item"><a href="/add_medical_test_result" class="btn btn-danger">Dodaj Badania</a></li>
+                    <li class="nav-item"><a href="/signout" class="btn btn-primary">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="/signin" class="btn btn-primary">Login</a></li>
+                    <li class="nav-item"><a href="/signup" class="btn btn-primary">Signup</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    <div class="acontainer">
+        <div class="history-container">
+            <h1>Lista Badań</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Użytkownik</th>
+                        <th>Data badania</th>
+                        <th>Grupa krwi</th>
+                        <th>Poziom hemoglobiny</th>
+                        <th>Liczba płytek krwi</th>
+                        <th>Liczba białych krwinek</th>
+                        <th>Ciśnienie skurczowe</th>
+                        <th>Ciśnienie rozkurczowe</th>
+                        <th>Tętno</th>
+                        <th>Komentarze</th>
+                        <th>Czy kwalifikowany</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for test in medical_tests %}
+                        <tr>
+                            <td>{{ test.user.username }}</td>
+                            <td>{{ test.test_date }}</td>
+                            <td>{{ test.blood_group }}</td>
+                            <td>{{ test.hemoglobin_level }}</td>
+                            <td>{{ test.platelet_count }}</td>
+                            <td>{{ test.white_blood_cell_count }}</td>
+                            <td>{{ test.blood_pressure_systolic }}</td>
+                            <td>{{ test.blood_pressure_diastolic }}</td>
+                            <td>{{ test.heart_rate }}</td>
+                            <td>{{ test.comments }}</td>
+                            <td>{{ test.is_eligible }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="11">Nie znaleziono badań.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

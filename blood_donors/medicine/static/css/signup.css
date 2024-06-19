@@ -11,11 +11,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
+    padding: 10px;
     color: red;
     top: 0;
     left: 0;
     z-index: 1000;
+    position: fixed; /* Fixed position to stay at the top */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
 }
 
 .logo-container {
@@ -45,7 +47,7 @@ body {
 
 .nav-item {
     color: #fff;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .nav-item a, .nav-item {
@@ -58,6 +60,7 @@ body {
     border-radius: 4px;
     color: red;
     text-decoration: none;
+    margin-right: 20px;
 }
 
 .btn-primary {
@@ -75,21 +78,37 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-top: 120px; /* Space for fixed top bar */
     height: calc(100vh - 70px);
-    margin-top: 100px; /* Dodaj margines górny na przesunięcie poniżej top bar */
+}
+.acontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 120px; /* Space for fixed top bar */
+    height: calc(100vh - 70px);
 }
 
 .history-container {
-    background: #f2f2f2;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
+    background: #f2f2f2; /* Light gray background for the history container */
+    padding: 20px; /* Adds padding inside the container */
+    border-radius: 10px; /* Rounds the corners of the container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a shadow for depth */
+    width: 100%; /* Ensures the container takes the full width */
+    max-width: 1300px; /* Sets a maximum width for the container */
+    margin-top: 20px; /* Adds a margin at the top for spacing */
 }
 
 h1 {
-    text-align: center;
+    display: block;
+    background-color: white;
+    color: black; /* Text color, adjust as needed */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center the text */
+    margin-bottom: 20px; /* Space below the heading */
 }
 
 table {
@@ -126,7 +145,7 @@ tr:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
-    margin-top:50px;
+    margin-top: 50px;
 }
 
 h2 {
@@ -228,14 +247,15 @@ h2 {
 .btn-documents:hover {
     background-color: #2980b9; /* Darker blue on hover */
 }
-.content{
+
+.content {
     display: flex;
     height: 60vh;
     gap: 10px;
-    margin: 50px 10px 0 10px;
-
+    margin: 200px 10px 0 10px;
 }
-.pane-left, .pane-right{
+
+.pane-left, .pane-right {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -244,38 +264,47 @@ h2 {
     box-sizing: border-box;
     border-radius: 50px;
 }
-.pane-left{
+
+.pane-left {
     background-color: lightblue;
 }
-.pane-right{
+
+.pane-right {
     background-color: lightcoral;
 }
-.exp-bar{
+
+.exp-bar {
     display: block;
 }
-.exp-progress{
+
+.exp-progress {
     width: 100%;
     border-collapse: collapse;
 }
-.exp-progress td{
+
+.exp-progress td {
     border: 1px solid red;
 }
-.exp-container{
+
+.exp-container {
     display: block;
     width: 90%;
     text-align: center;
 }
-.reservation-container{
+
+.reservation-container {
     display: block;
     width: 90%;
     text-align: center;
 }
-.exp-progress td{
+
+.exp-progress td {
     padding: 0;
     margin: 0;
     border: 1px solid black;
 }
-.reservation-button{
+
+.reservation-button {
     display: inline-block;
     padding: 10px 20px;
     font-size: 16px;
@@ -289,6 +318,20 @@ h2 {
     transition: background-color 0.3s ease;
     margin-top: 50px;
 }
-.reservation-button:hover{
+
+.reservation-button:hover {
     background-color: lightblue;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
 }
