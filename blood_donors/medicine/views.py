@@ -1,3 +1,5 @@
+import time
+
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from datetime import datetime, timedelta
@@ -67,11 +69,23 @@ def home(request):
                         progress_2 = 0
                     else:
                         next_level = key
+                        total_exp = current_exp
+                        this_level_xp = levels[current_level]
+                        next_level_xp = levels[next_level]
+                        level_diff = next_level_xp-this_level_xp
+
                         experience_missing = levels[next_level]-current_exp
-                        current_progress = levels[current_level]-current_exp
+                        current_progress = levels[next_level]-current_exp
                         required_progress = levels[next_level]-levels[current_level]
-                        progress = round((current_progress/required_progress)*100,0)
+                        progress = round(((required_progress-current_progress)/required_progress)*100,0)
                         progress_2 = 100 - progress
+                        print(levels[current_level])
+                        print(levels[next_level])
+                        print(experience_missing)
+                        print(current_progress)
+                        print(required_progress)
+                        print(progress)
+                        print(progress_2)
                     break
 
 
@@ -214,10 +228,17 @@ def get_next_status(current_status):
 def reservation_history(request, id=None):
     if request.method == 'POST':
         reservation_id = request.POST.get('reservation_id')
-        print(reservation_id)
         reservation = Reservation.objects.get(id=reservation_id)
-        reservation.status = get_next_status(reservation.status)
+        new_status = get_next_status(reservation.status)
+        curr_user = reservation.user
+        reservation.status = new_status
         reservation.save()
+        user_edit = Profile.objects.get(user=curr_user)
+        liczba_confirmed = Reservation.objects.filter(user=curr_user, status='completed').count()
+        print(liczba_confirmed)
+        total_xp = liczba_confirmed * 750
+        user_edit.exp = total_xp
+        user_edit.save()
         return redirect('reservation_history')
 
     reservations = Reservation.objects.all().order_by('-id')
